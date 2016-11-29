@@ -14,12 +14,24 @@ anglais) ou https://doc.ubuntu-fr.org/rsync en français, expliquer à quoi serv
 commandes suivantes (rôle et options):
 - Explications des commandes :
 
--   ```bash scp hubble@192.168.0.11:fichier_distant fichier_local ```  Copie d'un fichier depuis un serveur distant avec le nom d'utilisateur hubble en local à la racine d'où est envoyée la commande.
+-   ```shell scp hubble@192.168.0.11:fichier_distant fichier_local ```  Copie d'un fichier depuis un serveur distant avec le nom d'utilisateur hubble en local à la racine d'où est envoyée la commande.
 
--    ```bash rsync -av /src/foo/ /dest/foo ``` Copie de manière recursive et affichage des fichiers
+-    ```shell rsync -av /src/foo/ /dest/foo ``` Copie de manière recursive et affichage des fichiers
 
--   ```bash rsync -auv utilisateur@ip:/srcToSynchro/ ./destToSynchro/ ``` Synchronise les Fichiers de l'IP connecté avec UTILISATEUR vers le fichier de destination, en conservant la recursivité. 
+-   ```shell rsync -auv utilisateur@ip:/srcToSynchro/ ./destToSynchro/ ``` Synchronise les Fichiers de l'IP connecté avec UTILISATEUR vers le fichier de destination, en conservant la recursivité. 
 
-- ```bash rsync -auv -e "ssh" utilisateur@ip:/srcToSynchro/ ./destToSynchro/ ``` Même chose que précédement mais en SSH 
+- ```shell rsync -auv -e "ssh" utilisateur@ip:/srcToSynchro/ ./destToSynchro/ ``` Même chose que précédement mais en SSH 
 
-- ```bash rsync -auv --delete -e "ssh" utilisateur@ip:/srcToSynchro/ ./destToSynchro/ ``` Même chose que précédant mais efface les fichiers qui n'existent pas chez l'émetteur
+- ```shell rsync -auv --delete -e "ssh" utilisateur@ip:/srcToSynchro/ ./destToSynchro/ ``` Même chose que précédant mais efface les fichiers qui n'existent pas chez l'émetteur
+
+
+### II Avant de mettre en œuvre votre solution, vous décidez de tester individuellement ces outils.
+
+- ```shell sudo scp USER@SRVSECOUR:\partage \partage ```  ◦ de copier à l'aide de scp depuis le serveur srv-secours les données du répertoire
+partagé /partage des utilisateurs vers le répertoire /archives/ du serveur backup.
+(ndlr : depuis signifie ici : lancer à partir de).
+
+- ``shell tar -cvf nom_archive.tar nom_dossier/  ```  ◦ d'archiver la copie en la compressant. L'archive portera le nom: archiveUSER.tar.gz
+  
+  
+  ◦ de synchroniser depuis le srv-secours (disposant du service rsync) les répertoires des comptes utilisateurs du serveur srv.lycee.lan 
